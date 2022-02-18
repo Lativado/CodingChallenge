@@ -20,14 +20,15 @@ public class NotificationViewModel
 
     public Boolean IsPhoneSelected { get; set; }
 
-    [DataType(DataType.EmailAddress)]
+    [EmailAddress]
     public String? Email { get; set; }
 
-    [Display(Name = "Phone Number")]
+    [Phone]
     [DataType(DataType.PhoneNumber)]
     public String? PhoneNumber { get; set; }
 
     [DataType(DataType.Text)]
+    [Required]
     public String? Supervisor { get; set; }
 
     public Dictionary<int, String> Supervisors { get; set; } = new Dictionary<int, String>() { { 0, "Select..." } };

@@ -25,19 +25,21 @@
             <div class="col-md-6">
                 @Html.CheckBoxFor(model => model.IsEmailSelected)
                 @Html.LabelFor(model => model.Email)
-                @Html.TextBoxFor(model => model.Email, htmlAttributes: new {@class="form-control"})
+                @Html.TextBoxFor(model => model.Email, htmlAttributes: new {placeholder = "name@email.com", @class="form-control"})
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-6">
                 @Html.CheckBoxFor(model => model.IsPhoneSelected)
                 @Html.LabelFor(model => model.PhoneNumber)
-
-                @Html.TextBoxFor(model => model.PhoneNumber, htmlAttributes: new {@class="form-control"})
+                @Html.TextBoxFor(model => model.PhoneNumber, htmlAttributes: new {placeholder = "222-333-4444", @class="form-control"})
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-6">
                 @Html.LabelFor(model => model.Supervisor)
-                @Html.TextBoxFor(model => model.Supervisor, htmlAttributes: new {@class="form-control"})
+                @Html.TextBoxFor(model => model.Supervisor, htmlAttributes: new {placeholder = "TODO - Add, Dropdown", @class="form-control"})
                 @* @Html.DropDownListFor(model => model.Supervisors, new SelectList(ViewBag.Supervisors, "Key", "Value",
                     htmlAttributes: new {@class="form-control"})) *@
+                @Html.ValidationMessageFor(model => model.Supervisor, "", new { @class = "text-danger" })
             </div>
             <p style="text-align: center">
                 <input type="submit" value="Submit" id="submitButton" style="width:100px;text-align: center">
