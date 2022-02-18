@@ -21,10 +21,15 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public ActionResult NotificationFormSubmit(NotificationViewModel model)
+    public ActionResult NotificationFormSubmit(NotificationViewModel notificationViewModel)
     {
-        //some operations goes here
-        return View("Index");
+        if (ModelState.IsValid)
+        {
+            //Call API etc
+
+            return View();
+        }
+        return View("Index", notificationViewModel);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
