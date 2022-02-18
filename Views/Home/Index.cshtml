@@ -1,0 +1,66 @@
+﻿@model CodingChallenge.Models.NotificationViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Notification Form</h1>
+    @using (Html.BeginForm("NotificationFormSubmit", "Home"))
+    {
+        <table border="1" align="center">
+            <tr>
+                <th>@Html.LabelFor(model => model.FirstName)</th>
+                <th>@Html.LabelFor(model => model.LastName)</th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(model => model.FirstName)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.LastName)
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    How would you like to be notified?
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.CheckBoxFor(model => model.IsEmailSelected)
+                    @Html.LabelFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.CheckBoxFor(model => model.IsPhoneSelected)
+                    @Html.LabelFor(model => model.PhoneNumber)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(model => model.Email)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.PhoneNumber)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(model => model.Supervisors)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @* @Html.DropDownListFor(model => model.Supervisors, new SelectList(ViewBag.Supervisors, "Key", "Value")) *@
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <input type="submit" value="Submit" id="submitButton">
+                </td>
+            </tr>
+        </table>
+        <p style="color:red">@Html.ValidationMessageFor(model => model.FirstName)</p>
+        <p style="color:red">@Html.ValidationMessageFor(model => model.LastName)</p>
+    }
+</div>
