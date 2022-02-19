@@ -20,16 +20,16 @@ public class HomeController : Controller
         return View(notificationViewModel);
     }
 
-    [HttpPost]
-    public ActionResult NotificationFormSubmit(NotificationViewModel notificationViewModel)
+    public ActionResult NotificationFormSubmit(NotificationViewModel? notificationViewModel = null)
     {
-        if (ModelState.IsValid)
+        notificationViewModel = notificationViewModel ?? new NotificationViewModel();
+        if (!ModelState.IsValid)
         {
-            //Call API etc
-
-            return View();
+            return View("Index", notificationViewModel);
         }
-        return View("Index", notificationViewModel);
+        //Call API etc
+
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
