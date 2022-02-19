@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CodingChallenge.Models;
 
@@ -21,15 +22,47 @@ public class NotificationViewModel
     public Boolean IsPhoneSelected { get; set; }
 
     [EmailAddress]
+    [RequiredIfEmailChecked]
     public String? Email { get; set; }
 
-    [Phone]
-    [DataType(DataType.PhoneNumber)]
+    [Display(Name = "Phone Number")]
+    [Phone, MinLength(7), MaxLength(14)]
+    [RequiredIfPhoneNumberChecked]
     public String? PhoneNumber { get; set; }
 
-    [DataType(DataType.Text)]
+    [Display(Name = "Supervisor")]
     [Required]
-    public String? Supervisor { get; set; }
+    public int SelectedSupervisorId { get; set; }
 
-    public Dictionary<int, String> Supervisors { get; set; } = new Dictionary<int, String>() { { 0, "Select..." } };
+    public static List<SelectListItem>? Supervisors { get; set; }
+}
+
+public class RequiredIfEmailChecked : ValidationAttribute
+{
+    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+    {
+      var instance = validationContext.ObjectInstance;  
+      var type = instance.GetType();  
+      Boolean propertyValue = (Boolean)type.GetProperty(nameof(NotificationViewModel.IsEmailSelected)).GetValue(instance, null);  
+      if (propertyValue)  
+      {  
+         return new ValidationResult("Email is selected. Please add an Email address.");  
+      }  
+      return ValidationResult.Success; 
+    }
+}
+
+public class RequiredIfPhoneNumberChecked : ValidationAttribute
+{
+    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+    {
+      var instance = validationContext.ObjectInstance;  
+      var type = instance.GetType();  
+      Boolean propertyValue = (Boolean)type.GetProperty(nameof(NotificationViewModel.IsPhoneSelected)).GetValue(instance, null);  
+      if (propertyValue)  
+      {  
+         return new ValidationResult("Phone is selected. Please add a phone number.");  
+      }  
+      return ValidationResult.Success; 
+    }
 }

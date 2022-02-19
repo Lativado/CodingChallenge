@@ -19,7 +19,7 @@
                 @Html.TextBoxFor(model => model.LastName, htmlAttributes: new {@class="form-control"})
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
             </div>
-            <div style="text-align: center">
+            <div>
                 How would you like to be notified?
             </div>
             <div class="col-md-6">
@@ -35,11 +35,9 @@
                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-6">
-                @Html.LabelFor(model => model.Supervisor)
-                @Html.TextBoxFor(model => model.Supervisor, htmlAttributes: new {placeholder = "TODO - Add, Dropdown", @class="form-control"})
-                @* @Html.DropDownListFor(model => model.Supervisors, new SelectList(ViewBag.Supervisors, "Key", "Value",
-                    htmlAttributes: new {@class="form-control"})) *@
-                @Html.ValidationMessageFor(model => model.Supervisor, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.SelectedSupervisorId)
+                @Html.DropDownListFor(model => model.SelectedSupervisorId, NotificationViewModel.Supervisors, "Select...", htmlAttributes: new{@class="form-control"}) 
+                @Html.ValidationMessageFor(model => model.SelectedSupervisorId, "", new { @class = "text-danger" })
             </div>
             <p style="text-align: center">
                 <input type="submit" value="Submit" id="submitButton" style="width:100px;text-align: center">
