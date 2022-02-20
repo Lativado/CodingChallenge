@@ -90,7 +90,8 @@ public class HomeController : Controller
                 new KeyValuePair<string, string>(nameof(NotificationViewModel.IsPhoneSelected), notificationViewModel.IsPhoneSelected ? "True" : "False"),
                 new KeyValuePair<string, string>(nameof(NotificationViewModel.Email), notificationViewModel.Email ?? String.Empty),
                 new KeyValuePair<string, string>(nameof(NotificationViewModel.PhoneNumber), notificationViewModel.PhoneNumber ?? String.Empty),
-                new KeyValuePair<string, string>(nameof(NotificationViewModel.Supervisors), NotificationViewModel.Supervisors != null ? NotificationViewModel.Supervisors.Where(s => s.Value == notificationViewModel.SelectedSupervisorId.ToString()).FirstOrDefault().Text : String.Empty)
+                //Can't use the reflected name here, and my selection of the supervisor feels dirty. There has to be a better way.
+                new KeyValuePair<string, string>("Supervisor", NotificationViewModel.Supervisors != null ? NotificationViewModel.Supervisors.Where(s => s.Value == notificationViewModel.SelectedSupervisorId.ToString()).FirstOrDefault().Text : String.Empty)
             });
             var response = await client.PostAsync(baseUrl + "api/Submit", content);
 
