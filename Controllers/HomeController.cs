@@ -49,7 +49,7 @@ public class HomeController : Controller
         {
             return RequestSupervisors().Result;
         }
-        catch (HttpRequestException)
+        catch (Exception)
         {
             //Just move on with an empty list of supervisors.
             return new List<SelectListItem>();

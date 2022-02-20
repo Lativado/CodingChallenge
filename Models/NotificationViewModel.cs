@@ -44,7 +44,7 @@ public class RequiredIfEmailChecked : ValidationAttribute
       var instance = validationContext.ObjectInstance;  
       var type = instance.GetType();  
       Boolean propertyValue = (Boolean)type.GetProperty(nameof(NotificationViewModel.IsEmailSelected)).GetValue(instance, null);  
-      if (propertyValue)  
+      if (propertyValue && (value == null || String.IsNullOrWhiteSpace(value.ToString()))) 
       {  
          return new ValidationResult("Email is selected. Please add an Email address.");  
       }  
@@ -59,7 +59,7 @@ public class RequiredIfPhoneNumberChecked : ValidationAttribute
       var instance = validationContext.ObjectInstance;  
       var type = instance.GetType();  
       Boolean propertyValue = (Boolean)type.GetProperty(nameof(NotificationViewModel.IsPhoneSelected)).GetValue(instance, null);  
-      if (propertyValue)  
+      if (propertyValue && (value == null || String.IsNullOrWhiteSpace(value.ToString()))) 
       {  
          return new ValidationResult("Phone is selected. Please add a phone number.");  
       }  
