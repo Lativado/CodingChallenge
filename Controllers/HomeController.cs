@@ -9,7 +9,7 @@ namespace CodingChallenge.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly String baseUrl = "https://localhost:7041/";
+    private readonly String baseUrl = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true" ? "http://codingchallengeapi:5196/" : "localhost:5196/";
 
     public HomeController(ILogger<HomeController> logger)
     {
